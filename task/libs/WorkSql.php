@@ -41,13 +41,17 @@ class WorkSql extends Sql
 
             $select = $mysql->prepare($this->querySelectMySql);
 
-            echo $this->querySelectMySql;
-            echo implode("`, `", $this->fields);
-            $select->bindParam(':fields', implode("`, `", $this->fields));
-            $select->bindParam(':table', implode("`, `", $this->table));
-            $select->bindParam(':whereField', implode("`, `", $this->whereField));
-            $select->bindParam(':whereVal', implode("', '", $this->whereVal));
+            //echo $this->querySelectMySql;
+            //echo implode("`, `", $this->fields);
+            $select->bindParam(fields  , $fields);
+            $select->bindParam(table, $this->table);
+            echo $this->table;
+            $select->bindParam(whereField, $this->whereField);
+            $select->bindParam(whereVal, $this->whereVal);
+            $fields = implode(", ", $this->fields);
+            
             $select->execute();
+            echo $select->fetchAll();
             $index = 0;
             while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
                 $result[$index] = $row;
