@@ -8,8 +8,15 @@ include_once 'libs/WorkSql.php';
 
 
 $sql = new Sql();
-$pdo = new WorkSql();
-$pdo->connect();
+$mySql = new WorkSql();
+$mySql->setTable(TABLE);
+$mySql->setFields("name");
+$mySql->setFields("email");
+$mySql->setWhereField("name");
+$mySql->setWhereVal("Derek");
+//$connectMySql = $mySql->connect();
+$selectMySql =  $mySql->selectMySql();
+
 //select
 /*
 //$sql->select();

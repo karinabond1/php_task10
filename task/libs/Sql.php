@@ -119,8 +119,10 @@ class Sql
         $strPgSql = "";
         $strMySql = implode("`, `",$this->fields);
         $strPgSql = implode(", ",$this->fields);
-        $this->querySelectMySql = "SELECT `" . $strMySql . "` FROM `" . $this->table . "` WHERE " . $this->whereField . "='" . $this->whereVal . "'";
-        $this->querySelectPgSql = "SELECT " . $strPgSql . " FROM " . $this->table . " WHERE " . $this->whereField . " = '" . $this->whereVal . "';";
+        //$this->querySelectMySql = "SELECT `" . $strMySql . "` FROM `" . $this->table . "` WHERE " . $this->whereField . "='" . $this->whereVal . "'";
+        $this->querySelectMySql = "SELECT "."` :fields ` FROM `:table` WHERE :whereField=':whereVal'";
+        //echo $this->querySelectMySql;
+        //$this->querySelectPgSql = "SELECT " . $strPgSql . " FROM " . $this->table . " WHERE " . $this->whereField . " = '" . $this->whereVal . "';";
     }
 
     function insert()

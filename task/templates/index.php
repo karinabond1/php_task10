@@ -15,11 +15,11 @@
 
 //MySql
 echo "MySql".'<br>';
-echo $mysql_conn.'<br>';
-foreach ($arr_select as $key=>$field) {
-    echo $arr_select[$key]["id"]." ".$arr_select[$key]["name"]." ".$arr_select[$key]["email"]."<br>";
+echo $connectMySql.'<br>';
+foreach ($selectMySql as $key=>$field) {
+    echo $selectMySql[$key]["id"]." ".$selectMySql[$key]["name"]." ".$selectMySql[$key]["email"]."<br>";
 }
-echo $res_insert.'<br>';
+/*echo $res_insert.'<br>';
 echo $res_update.'<br>';
 echo $res_delete.'<br>';
 
@@ -33,7 +33,7 @@ foreach ($pg_arr_select as $key=>$fields) {
 }
 echo '<br>'.$pg_res_insert.'<br>';
 echo $pg_res_update.'<br>';
-echo $pg_res_delete.'<br>';
+echo $pg_res_delete.'<br>';*/
 
 ?>
 

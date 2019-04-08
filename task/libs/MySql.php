@@ -1,6 +1,6 @@
 <?php
 include_once 'Sql.php';
-include_once '/home/user14/public_html/PHP/php_task4/php_task4/config.php';
+include_once 'config.php';
 
 class MySql extends Sql
 {
