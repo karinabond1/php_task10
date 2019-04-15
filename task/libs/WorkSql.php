@@ -5,80 +5,128 @@ include_once 'config.php';
 
 class WorkSql extends Sql
 {
-    private $mysql;
-    private $pgSql;
+   // private $mysql;
+    //private $pgSql;
+    private $str;
 
-    function __construct()
+    function __construct($str)
     {
         parent::__construct();
+        $this->str=$str;
     }
 
-    public function connect()
-    {
-        try {
-            //$this->mysql = new PDO("mysql:host=".HOST.";dbname=".DATABASE.";charset=utf8_unicode_ci", USER_NAME, USER_PASS);
-            $this->pgSql = new PDO('pgsql:host=' . HOST . ';dbname=' . DATABASE . ";charset=utf8_unicode_ci", USER_NAME, USER_PASS);
-            // $this->mysql->exec("set names utf8");
-            //$this->pgSql->exec("set names utf8");
-            //$this->mysql->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-        } catch (PDOException $e) {
-            $str = 'Error: ' . $e->getMessage();
-        }
-        return $str;
-    }
-
-    public function selectMysql()
+    public function select()
     {
         parent::select();
         $result = array();
-        $qury = $this->querySelectMySql;
 
         try {
 
-            $mysql = new PDO("mysql:host=" . HOST . ";dbname=" . DATABASE /*. ";charset=utf8_unicode_ci"*/, USER_NAME, USER_PASS);
+            $mysql = new PDO($this->str.":host=" . HOST . ";port=" . PORT . ";dbname=" . DATABASE /*. ";charset=utf8_unicode_ci"*/, USER_NAME, USER_PASS);
             $mysql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-            $select = $mysql->prepare($this->querySelectMySql);
-
-            //echo $this->querySelectMySql;
-            //echo implode("`, `", $this->fields);
-            $select->bindParam(fields  , $fields);
-            $select->bindParam(table, $this->table);
-            echo $this->table;
-            $select->bindParam(whereField, $this->whereField);
-            $select->bindParam(whereVal, $this->whereVal);
-            $fields = implode(", ", $this->fields);
+            $select = $mysql->prepare($this->querySelect);
             
             $select->execute();
-            echo $select->fetchAll();
             $index = 0;
             while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
                 $result[$index] = $row;
                 $index++;
             }
         } catch (PDOException $e) {
+            echo $str = 'Error:+ ' . $e->getMessage();
+        }
+        return $result;
+    }
+
+    public function insert()
+    {
+        parent::insert();
+        $result = "";
+
+        try {
+
+            $mysql = new PDO($this->str.":host=" . HOST . ";port=" . PORT . ";dbname=" . DATABASE /*. ";charset=utf8_unicode_ci"*/, USER_NAME, USER_PASS);
+            $mysql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+            $insert = $mysql->prepare($this->queryInsert);
+            $insert->bindParam(':strName', $this->values[0]);
+            $insert->bindParam(':strMail', $this->values[1]);
+            //$res = $insert->execute();
+            if($insert->execute()){
+                $result = "The field was added";
+            }else{
+                $result = "The field was NOT added";
+            }
+
+
+        } catch (PDOException $e) {
+            print_r($e->getTraceAsString());
             echo $str = 'Error: ' . $e->getMessage();
         }
         return $result;
     }
 
-    public function selectPgSql()
+    public function update()
     {
-        $result = array();
-        $select = $this->pgSql->prepare($this->querySelectMySql);
-        $select->bindParam(':fields', implode("`, `", $this->fields));
-        $select->bindParam(':table', implode("`, `", $this->table));
-        $select->bindParam(':whereField', implode("`, `", $this->whereField));
-        $select->bindParam(':whereVal', implode("`, `", $this->whereVal));
-        $select->execute();
-        $index = 0;
-        while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
-            $result[$index] = $row;
-            $index++;
+        parent::update();
+        $result = "";
+
+        try {
+
+            $mysql = new PDO($this->str.":host=" . HOST . ";port=" . PORT . ";dbname=" . DATABASE /*. ";charset=utf8_unicode_ci"*/, USER_NAME, USER_PASS);
+            $mysql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+            $insert = $mysql->prepare($this->queryUpdate);
+            $insert->bindParam(':whereVal',  $this->whereVal);
+            //echo $this->whereVal;
+            //$res = $insert->execute();
+            if($insert->execute()){
+                $result = "The field was updated";
+            }else{
+                $result = "The field was NOT updated";
+            }
+
+
+        } catch (PDOException $e) {
+            print_r($e->getTraceAsString());
+            echo $str = 'Error: ' . $e->getMessage();
         }
         return $result;
     }
+
+    public function delete()
+    {
+        parent::delete();
+        $result = "";
+
+        try {
+
+            $mysql = new PDO($this->str.":host=" . HOST . ";port=" . PORT . ";dbname=" . DATABASE /*. ";charset=utf8_unicode_ci"*/, USER_NAME, USER_PASS);
+            $mysql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+            $insert = $mysql->prepare($this->queryDelete);
+            $insert->bindParam(':whereVal',  $this->whereVal);
+            //$res = $insert->execute();
+            if($insert->execute()){
+                $result = "The field was deleted";
+            }else{
+                $result = "The field was NOT deleted";
+            }
+
+
+        } catch (PDOException $e) {
+            print_r($e->getTraceAsString());
+            echo $str = 'Error: ' . $e->getMessage();
+        }
+        return $result;
+    }
+
+
 
 
 }

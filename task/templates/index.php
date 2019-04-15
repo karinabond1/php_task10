@@ -14,26 +14,101 @@
 <?php
 
 //MySql
-echo "MySql".'<br>';
-echo $connectMySql.'<br>';
+echo "<b>MySql</b><br>";
 foreach ($selectMySql as $key=>$field) {
-    echo $selectMySql[$key]["id"]." ".$selectMySql[$key]["name"]." ".$selectMySql[$key]["email"]."<br>";
+    echo $selectMySql[$key]["name"]." ".$selectMySql[$key]["email"]."<br>";
 }
-/*echo $res_insert.'<br>';
-echo $res_update.'<br>';
-echo $res_delete.'<br>';
+echo $resInsertMySql.'<br>';
+echo $resUpdateMySql.'<br>';
+echo $resDeleteMySql.'<br>';
+echo "<b>Distinct and Inner Join</b><br>";
+foreach ($resDistinctInnerJoinMySql as $key=>$field) {
+    echo $resDistinctInnerJoinMySql[$key]["name"]." ".$resDistinctInnerJoinMySql[$key]["email"]."<br>";
+}
+
+echo "<b>Distinct and Left Outer Join</b><br>";
+foreach ($resDistinctLeftOuterJoinMySql as $key=>$field) {
+    echo $resDistinctLeftOuterJoinMySql[$key]["name"]." ".$resDistinctLeftOuterJoinMySql[$key]["email"]."<br>";
+}
+
+echo "<b>Distinct and Right Outer Join</b><br>";
+foreach ($resDistinctRightOuterJoinMySql as $key=>$field) {
+    echo $resDistinctRightOuterJoinMySql[$key]["name"]." ".$resDistinctRightOuterJoinMySql[$key]["email"]."<br>";
+}
+
+echo "<b>Distinct and Cross Join</b><br>";
+foreach ($resDistinctCrossJoinMySql as $key=>$field) {
+    echo $resDistinctCrossJoinMySql[$key]["name"]." ".$resDistinctCrossJoinMySql[$key]["email"]."<br>";
+}
+echo "<b>Distinct and Cross Join Limit</b><br>";
+foreach ($resDistinctCrossJoinLimitMySql as $key=>$field) {
+    echo $resDistinctCrossJoinLimitMySql[$key]["name"]." ".$resDistinctCrossJoinLimitMySql[$key]["email"]."<br>";
+}
+
+echo "<b>Distinct and Natural Join</b><br>";
+foreach ($resDistinctNaturalJoinMySql as $key=>$field) {
+    echo $resDistinctNaturalJoinMySql[$key]["name"]." ".$resDistinctNaturalJoinMySql[$key]["email"]."<br>";
+}
+
+echo "<b>GroupBy HavingCount OrderBy</b><br>";
+foreach ($resGroupByHavingCountOrderByMySql as $key=>$field) {
+    echo $resGroupByHavingCountOrderByMySql[$key]["name"]." ".$resGroupByHavingCountOrderByMySql[$key]["email"]."<br>";
+}
 
 //PgSql
-echo "PgSql".'<br>';
-echo $pg_con.'<br>';
-foreach ($pg_arr_select as $key=>$fields) {
+echo "<br><b>PgSql</b><br>";
+/*foreach ($selectPgSql as $key=>$fields) {
     foreach($fields as $field){
         echo $field." ";
     }
 }
-echo '<br>'.$pg_res_insert.'<br>';
-echo $pg_res_update.'<br>';
-echo $pg_res_delete.'<br>';*/
+echo '<br>'.$resInsertPgSql.'<br>';
+echo $resUpdatePgSql.'<br>';
+echo $resDeletePgSql.'<br>';
+echo "<b>Distinct and Inner Join</b><br>";
+foreach ($resDistinctInnerJoinPgSql as $key=>$fields) {
+    foreach($fields as $field){
+        echo $field." ";
+    }
+}
+echo "<b>Distinct and Left Outer Join</b><br>";
+foreach ($resDistinctLeftOuterJoinPgSql as $key=>$fields) {
+    foreach($fields as $field){
+        echo $field." ";
+    }
+}
+echo "<b>Distinct and Right Outer Join</b><br>";
+foreach ($resDistinctRightOuterJoinPgSql as $key=>$fields) {
+    foreach($fields as $field){
+        echo $field." ";
+    }
+}
+echo "<b>Distinct and Cross Join</b><br>";
+foreach ($resDistinctCrossJoinPgSql as $key=>$fields) {
+    foreach($fields as $field){
+        echo $field." ";
+    }
+}
+echo "<b>Distinct and Cross Join Limit</b><br>";
+foreach ($resDistinctCrossJoinLimitPgSql as $key=>$fields) {
+    foreach($fields as $field){
+        echo $field." ";
+    }
+}
+echo "<b>Distinct and Natural Join</b><br>";
+foreach ($resDistinctNaturalJoinPgSql as $key=>$fields) {
+    foreach($fields as $field){
+        echo $field." ";
+    }
+}
+echo "<b>GroupBy HavingCount OrderBy</b><br>";
+foreach ($resGroupByHavingCountOrderByPgSql as $key=>$fields) {
+    foreach($fields as $field){
+        echo $field." ";
+    }
+}*/
+
+
 
 ?>
 
