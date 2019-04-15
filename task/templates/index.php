@@ -57,7 +57,7 @@ foreach ($resGroupByHavingCountOrderByMySql as $key=>$field) {
 
 //PgSql
 echo "<br><b>PgSql</b><br>";
-/*foreach ($selectPgSql as $key=>$fields) {
+foreach ($selectPgSql as $key=>$fields) {
     foreach($fields as $field){
         echo $field." ";
     }
@@ -70,43 +70,50 @@ foreach ($resDistinctInnerJoinPgSql as $key=>$fields) {
     foreach($fields as $field){
         echo $field." ";
     }
+    echo "<br>";
 }
 echo "<b>Distinct and Left Outer Join</b><br>";
 foreach ($resDistinctLeftOuterJoinPgSql as $key=>$fields) {
     foreach($fields as $field){
         echo $field." ";
     }
+    echo "<br>";
 }
 echo "<b>Distinct and Right Outer Join</b><br>";
 foreach ($resDistinctRightOuterJoinPgSql as $key=>$fields) {
     foreach($fields as $field){
         echo $field." ";
     }
+    echo "<br>";
 }
 echo "<b>Distinct and Cross Join</b><br>";
 foreach ($resDistinctCrossJoinPgSql as $key=>$fields) {
     foreach($fields as $field){
         echo $field." ";
     }
+    echo "<br>";
 }
 echo "<b>Distinct and Cross Join Limit</b><br>";
 foreach ($resDistinctCrossJoinLimitPgSql as $key=>$fields) {
     foreach($fields as $field){
         echo $field." ";
     }
+    echo "<br>";
 }
 echo "<b>Distinct and Natural Join</b><br>";
 foreach ($resDistinctNaturalJoinPgSql as $key=>$fields) {
     foreach($fields as $field){
         echo $field." ";
     }
+    echo "<br>";
 }
 echo "<b>GroupBy HavingCount OrderBy</b><br>";
 foreach ($resGroupByHavingCountOrderByPgSql as $key=>$fields) {
     foreach($fields as $field){
         echo $field." ";
     }
-}*/
+    echo "<br>";
+}
 
 
 

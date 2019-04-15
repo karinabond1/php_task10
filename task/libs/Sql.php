@@ -149,7 +149,7 @@ class Sql
         //if($this->distinct != "")
 
         $this->querySelect = "SELECT " . $this->distinct . " " . $strFields . " FROM " . $this->table . " " . $this->innerJoin . $this->leftOuterJoin . $this->rightOuterJoin . $this->crossJoin . $this->naturalJoin . " " . $this->group . " " . $this->having . " " .$this->where. " ".$this->whereField . " " .$this->oper." ".$this->mark. $this->whereVal . $this->mark. " " . $this->order . " " . $this->limit;
-        echo $this->querySelect;
+        //echo $this->querySelect;
     }
 
     function insert()
@@ -157,7 +157,7 @@ class Sql
         $strFields = implode(",", $this->fields);
         //echo $strFields;
         //$this->queryInsertMySql = "INSERT"." INTO `" . $this->table . "`( `" . $strFieldsMySql . "`) " . "VALUES ('". $strNameMySql . "')";
-        $this->queryInsert = "INSERT" . " INTO " . $this->table . "(" . $strFields . ") " . "VALUES (:strName, :strMail);";
+        $this->queryInsert = "INSERT" . " INTO " . $this->table . "(id," . $strFields . ") " . "VALUES (4,:strName, :strMail);";
         //echo "<p>".$this->queryInsert."<p>";
 
     }

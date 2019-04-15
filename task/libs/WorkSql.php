@@ -5,14 +5,14 @@ include_once 'config.php';
 
 class WorkSql extends Sql
 {
-   // private $mysql;
+    // private $mysql;
     //private $pgSql;
     private $str;
 
     function __construct($str)
     {
         parent::__construct();
-        $this->str=$str;
+        $this->str = $str;
     }
 
     public function select()
@@ -22,12 +22,18 @@ class WorkSql extends Sql
 
         try {
 
-            $mysql = new PDO($this->str.":host=" . HOST . ";port=" . PORT . ";dbname=" . DATABASE /*. ";charset=utf8_unicode_ci"*/, USER_NAME, USER_PASS);
+            if ($this->str == "pgsql") {
+                $port = PORTPGSQL;
+            } else {
+                $port = PORT;
+            }
+
+            $mysql = new PDO($this->str . ":host=" . HOST . ";port=" . $port . ";dbname=" . DATABASE /*. ";charset=utf8_unicode_ci"*/, USER_NAME, USER_PASS);
             $mysql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
             $select = $mysql->prepare($this->querySelect);
-            
+
             $select->execute();
             $index = 0;
             while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
@@ -46,8 +52,13 @@ class WorkSql extends Sql
         $result = "";
 
         try {
+            if ($this->str == "pgsql") {
+                $port = PORTPGSQL;
+            } else {
+                $port = PORT;
+            }
 
-            $mysql = new PDO($this->str.":host=" . HOST . ";port=" . PORT . ";dbname=" . DATABASE /*. ";charset=utf8_unicode_ci"*/, USER_NAME, USER_PASS);
+            $mysql = new PDO($this->str . ":host=" . HOST . ";port=" . $port . ";dbname=" . DATABASE /*. ";charset=utf8_unicode_ci"*/, USER_NAME, USER_PASS);
             $mysql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
@@ -55,9 +66,9 @@ class WorkSql extends Sql
             $insert->bindParam(':strName', $this->values[0]);
             $insert->bindParam(':strMail', $this->values[1]);
             //$res = $insert->execute();
-            if($insert->execute()){
+            if ($insert->execute()) {
                 $result = "The field was added";
-            }else{
+            } else {
                 $result = "The field was NOT added";
             }
 
@@ -75,18 +86,23 @@ class WorkSql extends Sql
         $result = "";
 
         try {
+            if ($this->str == "pgsql") {
+                $port = PORTPGSQL;
+            } else {
+                $port = PORT;
+            }
 
-            $mysql = new PDO($this->str.":host=" . HOST . ";port=" . PORT . ";dbname=" . DATABASE /*. ";charset=utf8_unicode_ci"*/, USER_NAME, USER_PASS);
+            $mysql = new PDO($this->str . ":host=" . HOST . ";port=" . $port . ";dbname=" . DATABASE /*. ";charset=utf8_unicode_ci"*/, USER_NAME, USER_PASS);
             $mysql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
             $insert = $mysql->prepare($this->queryUpdate);
-            $insert->bindParam(':whereVal',  $this->whereVal);
+            $insert->bindParam(':whereVal', $this->whereVal);
             //echo $this->whereVal;
             //$res = $insert->execute();
-            if($insert->execute()){
+            if ($insert->execute()) {
                 $result = "The field was updated";
-            }else{
+            } else {
                 $result = "The field was NOT updated";
             }
 
@@ -105,16 +121,22 @@ class WorkSql extends Sql
 
         try {
 
-            $mysql = new PDO($this->str.":host=" . HOST . ";port=" . PORT . ";dbname=" . DATABASE /*. ";charset=utf8_unicode_ci"*/, USER_NAME, USER_PASS);
+            if ($this->str == "pgsql") {
+                $port = PORTPGSQL;
+            } else {
+                $port = PORT;
+            }
+
+            $mysql = new PDO($this->str . ":host=" . HOST . ";port=" . $port . ";dbname=" . DATABASE /*. ";charset=utf8_unicode_ci"*/, USER_NAME, USER_PASS);
             $mysql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
             $insert = $mysql->prepare($this->queryDelete);
-            $insert->bindParam(':whereVal',  $this->whereVal);
+            $insert->bindParam(':whereVal', $this->whereVal);
             //$res = $insert->execute();
-            if($insert->execute()){
+            if ($insert->execute()) {
                 $result = "The field was deleted";
-            }else{
+            } else {
                 $result = "The field was NOT deleted";
             }
 
@@ -125,8 +147,6 @@ class WorkSql extends Sql
         }
         return $result;
     }
-
-
 
 
 }
